@@ -1,29 +1,30 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import axios from 'axios'
 
-let username = ref<String>('')
-let token = ref<String>('')
 let code = ref<String>('')
 let result = ref<Object>([])
+
+const submitForm = (e: any) => {
+    e.preventDefault()
+    
+}
 
 </script>
 
 <template>
   <div>
-    <h1>Insira suas credenciais para realizar o rastreio</h1>
-    <form action="">
+    <h1>Insira o código para rastreio</h1>
+    <form @submit="submitForm()">
       <div class="box-field">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" v-model="username" placeholder="Digite seu username">
       </div>
-      <div class="box-field">
-        <label for="token">Token</label>
-        <input type="text" id="token" name="token" v-model="token" placeholder="Digite seu token">
-      </div>
+      <input type="submit" value="submit" name="submit">
     </form>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 
 </style>
