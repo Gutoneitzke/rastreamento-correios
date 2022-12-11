@@ -7,7 +7,6 @@ let result = ref<Object>([])
 
 const submitForm = (e: any) => {
     e.preventDefault()
-    
 }
 
 </script>
