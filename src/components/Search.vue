@@ -14,7 +14,7 @@ const submitForm = (e: any) => {
 <template>
   <div>
     <h1>Insira o código para rastreio</h1>
-    <form @submit="submitForm()">
+    <form @submit.prevent="submitForm()">
       <div class="box-field">
         <label for="username">Username</label>
         <input type="text" id="username" name="username" v-model="username" placeholder="Digite seu username">

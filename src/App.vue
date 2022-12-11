@@ -25,7 +25,7 @@ const submitForm = () => {
 <template>
   <div class="content">
     <div class="login">
-      <h1>Insira suas credenciais para realizar o rastreio</h1>
+      <h1>Insira suas <b>credenciais</b> para realizar o <b>rastreio</b></h1>
       <form @submit.prevent="submitForm()">
         <div class="box-field">
           <label for="username">Username</label>
@@ -55,6 +55,9 @@ const submitForm = () => {
       align-items: center;
       h1{
         margin: 0;
+        b{
+          color: $green;
+        }
       }
       form{
         margin-top: 3rem;
