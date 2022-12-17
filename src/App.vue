@@ -140,7 +140,14 @@ const submitForm = () => {
           border-bottom: 1px solid $green;
         }
         th,td{
-          padding: .3rem 1rem;
+          padding: .4rem 1rem;
+        }
+        tr:nth-child(even){
+          background-color: $dark2;
+        }
+        tr:hover{
+          transition: .2s;
+          background-color: $dark3;
         }
       }
     }
