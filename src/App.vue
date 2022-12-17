@@ -7,6 +7,7 @@ let token = ref<String>('')
 let code = ref<String>('')
 let result = ref<Object>([])
 let showLogin = ref<Boolean>(true)
+let loading = ref<Boolean>(false)
 
 const submitForm = () => {
   if(!username.value || !token.value || !code.value)
@@ -14,6 +15,7 @@ const submitForm = () => {
     alert('Complete os campos corretamente')
     return;
   }
+  loading.value = true
   axios.get(`https://api.linketrack.com/track/json?user=${username.value}&token=${token.value}&codigo=${code.value}`)
     .then((response: any) => {
       if(response.status == 200 && response.data.eventos.length > 0)
@@ -25,6 +27,9 @@ const submitForm = () => {
     .catch((e: Object) => {
       console.log(e)
     })
+    .finally(() => {
+      loading.value = false
+    })
 }
 
 </script>
@@ -33,7 +38,7 @@ const submitForm = () => {
   <div class="content">
     <div v-if="showLogin" class="login">
       <h1>Insira suas <b>credenciais</b> da <b>(https://linketrack.com)</b><br>para realizar o <b>rastreio</b></h1>
-      <form @submit.prevent="submitForm()">
+      <form @submit.prevent="loading ? '' : submitForm()">
         <div class="box-field">
           <label for="username">Username</label>
           <input type="text" class="input-form" id="username" name="username" v-model="username" placeholder="Digite seu username">
@@ -46,7 +51,7 @@ const submitForm = () => {
           <label for="code">Código</label>
           <input type="text" class="input-form" id="code" name="code" v-model="code" placeholder="Digite o código do produto">
         </div>
-        <input type="submit" class="button" value="Enviar" name="submit">
+        <input type="submit" class="button" :value="loading ? 'Enviando...' : 'Enviar'" name="submit">
       </form>
     </div>
     <div v-else class="result">
