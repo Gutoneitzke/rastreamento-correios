@@ -4,6 +4,7 @@ import axios from 'axios'
 
 let username = ref<String>('')
 let token = ref<String>('')
+let code = ref<String>('')
 
 const submitForm = () => {
   if(!username.value || !token.value)
@@ -11,7 +12,7 @@ const submitForm = () => {
     alert('Complete os campos corretamente')
     return;
   }
-  axios.get(`https://api.linketrack.com/track/json?user=${username.value}&token=${token.value}`)
+  axios.get(`https://api.linketrack.com/track/json?user=${username.value}&token=${token.value}&codigo=${code.value}`)
     .then((response: Object) => {
       console.log(response)
     })
@@ -25,7 +26,7 @@ const submitForm = () => {
 <template>
   <div class="content">
     <div class="login">
-      <h1>Insira suas <b>credenciais</b> para realizar o <b>rastreio</b></h1>
+      <h1>Insira suas <b>credenciais</b> da <b>(https://linketrack.com)</b><br>para realizar o <b>rastreio</b></h1>
       <form @submit.prevent="submitForm()">
         <div class="box-field">
           <label for="username">Username</label>
@@ -33,7 +34,11 @@ const submitForm = () => {
         </div>
         <div class="box-field">
           <label for="token">Token</label>
-          <input type="text" class="input-form" id="token" name="token" v-model="token" placeholder="Digite seu token">
+          <input type="password" class="input-form" id="token" name="token" v-model="token" placeholder="Digite seu token">
+        </div>
+        <div class="box-field">
+          <label for="code">Código</label>
+          <input type="text" class="input-form" id="code" name="code" v-model="code" placeholder="Digite o código do produto">
         </div>
         <input type="submit" value="Enviar" name="submit">
       </form>
@@ -55,6 +60,7 @@ const submitForm = () => {
       align-items: center;
       h1{
         margin: 0;
+        text-align: center;
         b{
           color: $green;
         }
